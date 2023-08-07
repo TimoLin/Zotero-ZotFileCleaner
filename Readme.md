@@ -12,9 +12,11 @@ pip install --no-cache-dir --force-reinstall git+https://github.com/sciunto-org/
 ```
 
 ##  1. Preparation in Zotero
-- [] Remember the `Custom Location` setting in the `ZotFile Preferences`:
+- [ ] Remember the `Custom Location` setting in the `ZotFile Preferences`:  
+![1](https://github.com/TimoLin/Zotero-ZotFileCleaner/assets/7792396/e2e4956d-9e4a-4d1e-bd3a-03d964b31e12)
 
-- [] In Zotero, click (1)`File`->(2)`Export Library`->(3)`Select Better BibTex`->(3)Check `Keep updated` option->(4)Save the bib file to any folder your like.
+- [ ] In Zotero, click (1)`File`->(2)`Export Library`->(3)`Select Better BibTex`->(3)Check `Keep updated` option->(4)Save the bib file to any folder your like.  
+![2](https://github.com/TimoLin/Zotero-ZotFileCleaner/assets/7792396/c5053768-56af-4904-8f93-f7864beb2c0e)
 
 ## 2. Run the script
 
@@ -58,7 +60,10 @@ Citation keys of items without attachment files:
 ```
 
 ## 3. Find the items with problems and do your modification
-Click `Edit`->`Advanced Search`->`Paste the Citation keys to the input field`-> Click `Search` -> `Save Search`:  
+- [ ] Click `Edit`->`Advanced Search`->`Paste the Citation keys to the input field`-> Click `Search` -> `Save Search`:  
+![3](https://github.com/TimoLin/Zotero-ZotFileCleaner/assets/7792396/bf5e683d-8a52-4bc7-b590-393b2ae2912b) 
+![4](https://github.com/TimoLin/Zotero-ZotFileCleaner/assets/7792396/abec1dcd-aa27-438b-a893-e67b80cb3a6c)
 
-The sub collection named `Untitled` will be shown under `My library`. Do you modifications and then the `Untitled` collection can be deleted.
+- [ ] The sub collection named `Untitled` will be shown under `My library`. Do you modifications and then the `Untitled` collection can be deleted.  
+![5](https://github.com/TimoLin/Zotero-ZotFileCleaner/assets/7792396/6fec2a0e-cbd5-459a-9724-e7257665212a)
 
