@@ -22,7 +22,7 @@ pip install --no-cache-dir --force-reinstall git+https://github.com/sciunto-org/
 
 ```sh
 $ python3 ~/github/Zotero/src/zotfileCleaner.py -h
-usage: zotfileCleaner.py [-h] -f FILE -c CUSTOMLOCATION [-e]
+usage: zotfileCleaner.py [-h] -f FILE -c CUSTOMLOCATION [-e] [-d]
 
 ZotFileCleaner: An utility to find pdf files that are locally stored in Zotero
 database instead of ZotFile custom locations.
@@ -32,32 +32,70 @@ optional arguments:
   -f FILE, --file FILE  Zotero automatic exported better bibtex lib file.
   -c CUSTOMLOCATION, --customlocation CUSTOMLOCATION
                         Custom location defined in ZotFile preferences.
-  -e, --empty           Print items without any attachment files
+  -e, --empty           Print items without any attachment files.
+  -d, --delete          Clean up the zombie files under ZotFile folder .
 ```
-For example:  
-```
-$ python3 ~/github/Zotero/src/zotfileCleaner.py -f "~/Documents/Zotero/mylib.bib" -c "/Dropbox/Zotero" -e
-
-Citation keys of the files in Zotero database:
-  ahnHeatReleaseRate2022
-  aignerSwirlCounterswirlEffects1988
-  aignerSwirlCounterswirlEffects1988a
-  alessandroStudyTurbulentSpray2019
-  andreiniLocalSourceBased2013
-  ansysinc.ANSYSFluentTheory
-  araiBreakupLengthSpray1985
-  barlowEffectsTurbulenceSpecies1998
-  bhatiaUnderstandingLiquidJet2022
-----------------------------------------------
-Citation keys of items without attachment files:
-  brzustowskiCombustionTheory1987
-  caowenyuCaiYongflameletMoXingFenXiXuanLiuBeiRanShaoShiJinPinYouXiHuoDian2014
-  carvalhoLiquidFilmDisintegration2002
-  chiEfficientPremixedTurbulent2022
-  chuDirectNumericalSimulation2016
-  chungBLASTNeTCallCommunityinvolved2022
-  ciolkoszKIAIProjectFinal1999
-```
+### Examples
+- 1. Find the items that are locally stored in Zotero database instead of ZotFile custom locations
+    ```
+    # Replace with your own path
+    python3 ~/github/Zotero/src/zotfileCleaner.py -f "YOUR/PATH/mylib.bib" -c "YOUR/ZOTFILE/CUSTOM/PATH"
+    ```
+    ```console
+    # Output
+    Citation keys of the files in Zotero database: 2
+      labahnLeanBlowoutSimulations
+      wangLargeeddySimulationsFlow2020
+    ---------------------------------------------
+    ZotFile zombie files: 7
+    Done!
+    ```
+- 2. Find the items without any attachment files
+    ```
+    # Replace with your own path
+    python3 ~/github/Zotero/src/zotfileCleaner.py -f "YOUR/PATH/mylib.bib" -c "YOUR/ZOTFILE/CUSTOM/PATH" -e
+    ```
+    ```
+    # Output
+    Citation keys of the files in Zotero database: 2
+      labahnLeanBlowoutSimulations
+      wangLargeeddySimulationsFlow2020
+    ---------------------------------------------
+    Citation keys of items without attachment files: 123
+      ahnHeatReleaseRate2022
+      aignerSwirlCounterswirlEffects1988
+      aignerSwirlCounterswirlEffects1988a
+      andreiniLocalSourceBased2013
+      ansysinc.ANSYSFluentTheory
+      ...
+      zhouyuTongZhouSheLiuRanShaoShiFeiYuHunTuanLiuRanShaoLiuChangTeXingDaWoMoNiYanJiu2017
+    ---------------------------------------------
+    ZotFile zombie files: 7
+    Done!
+    ```
+- 3. Delete the ZotFile zombie files
+    ```sh
+    # Replace with your own path
+    python3 ~/github/Zotero/src/zotfileCleaner.py -f "YOUR/PATH/mylib.bib" -c "YOUR/ZOTFILE/CUSTOM/PATH" -d
+    ```
+    ```console
+    #Output
+    Citation keys of the files in Zotero database: 2
+      labahnLeanBlowoutSimulations
+      wangLargeeddySimulationsFlow2020
+    ---------------------------------------------
+    ZotFile zombie files: 7
+    ---------------------------------------------
+    Moving Zombie Files to Trash...
+      /Dropbox/Zotero/_/李林_et_al_一种双预膜气动雾化低污染燃烧室头部结构.pdf
+      /Dropbox/Zotero/2018/夏朝阳_et_al_2018_基于FGM的湍流射流扩散火焰超大涡模_拟.pdf
+      /Dropbox/Zotero/2015/Zips_et_al_2015_Numerical_simulation_of_a_single-element_GOx-GCH_4_rocket.pdf
+      /Dropbox/Zotero/Science China Technological Sciences2015/Zhang_et_al_2015_Large_eddy_simulation_of_unconfined_turbulent_swirling_flow.pdf
+      /Dropbox/Zotero/Combustion and Flame2020/Zadsirjan_et_al_2020_Large_eddy_simulation_of_turbulent_diffusion_jet_flames.pdf
+      /Dropbox/Zotero/Chinese Journal of Aeronautics2015/Zhiyin_2015_Large-eddy_simulation.pdf
+      /Dropbox/Zotero/Combustion and Flame2021/Zhong_et_al_2021_Local_flame_and_flow_properties_of_propagating_premixed.pdf
+    Done!
+    ```
 
 ## 3. Find the items with problems and do your modification
 - [ ] Click `Edit`->`Advanced Search`->`Paste the Citation keys to the input field`-> Click `Search` -> `Save Search`:  

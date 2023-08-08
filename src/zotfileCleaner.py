@@ -77,13 +77,12 @@ def filterZombieFiles(bib_lib, custom_location, flag_clean=False):
     file_zombies = list(set(file_list)-set(lib_file_list))
     print("-"*45)
     print("ZotFile zombie files: {0}".format(len(file_zombies)))
-    for zombie in file_zombies:
-        print(" ", zombie)
 
     if (flag_clean):
         print("-"*45)
         print("Moving Zombie Files to Trash...")
         for zombie in file_zombies:
+            print(" ", zombie)
             send2trash(zombie)
 
     return
