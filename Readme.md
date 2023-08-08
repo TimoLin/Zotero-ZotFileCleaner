@@ -9,6 +9,7 @@ Environment: `Python3` and [`bibtexparser`](https://github.com/sciunto-org/pytho
 
 ```sh
 pip install --no-cache-dir --force-reinstall git+https://github.com/sciunto-org/python-bibtexparser@main
+pip install send2trash
 ```
 
 ##  1. Preparation in Zotero
@@ -19,7 +20,6 @@ pip install --no-cache-dir --force-reinstall git+https://github.com/sciunto-org/
 ![2](https://github.com/TimoLin/Zotero-ZotFileCleaner/assets/7792396/c5053768-56af-4904-8f93-f7864beb2c0e)
 
 ## 2. Run the script
-
 ```sh
 $ python3 ~/github/Zotero/src/zotfileCleaner.py -h
 usage: zotfileCleaner.py [-h] -f FILE -c CUSTOMLOCATION [-e] [-d]
@@ -36,7 +36,7 @@ optional arguments:
   -d, --delete          Clean up the zombie files under ZotFile folder .
 ```
 ### Examples
-- 1. Find the items that are locally stored in Zotero database instead of ZotFile custom locations
+-1. Find the items that are locally stored in Zotero database instead of ZotFile custom locations
     ```
     # Replace with your own path
     python3 ~/github/Zotero/src/zotfileCleaner.py -f "YOUR/PATH/mylib.bib" -c "YOUR/ZOTFILE/CUSTOM/PATH"
@@ -50,12 +50,12 @@ optional arguments:
     ZotFile zombie files: 7
     Done!
     ```
-- 2. Find the items without any attachment files
-    ```
+-2. Find the items without any attachment files
+    ```sh
     # Replace with your own path
     python3 ~/github/Zotero/src/zotfileCleaner.py -f "YOUR/PATH/mylib.bib" -c "YOUR/ZOTFILE/CUSTOM/PATH" -e
     ```
-    ```
+    ```console
     # Output
     Citation keys of the files in Zotero database: 2
       labahnLeanBlowoutSimulations
@@ -73,7 +73,7 @@ optional arguments:
     ZotFile zombie files: 7
     Done!
     ```
-- 3. Delete the ZotFile zombie files
+-3. Delete the ZotFile zombie files
     ```sh
     # Replace with your own path
     python3 ~/github/Zotero/src/zotfileCleaner.py -f "YOUR/PATH/mylib.bib" -c "YOUR/ZOTFILE/CUSTOM/PATH" -d
