@@ -8,6 +8,7 @@ import sys
 import os
 import bibtexparser
 import argparse
+from send2trash import send2trash
 
 def bibReader(file_name):
     '''Read the bib library
@@ -39,15 +40,53 @@ def checkLocalFile(bib_lib, custom_location, flag_empty):
             empty_files.append(entry)
 
     # Print result
-    print("Citation keys of the files in Zotero database:")
+    print("Citation keys of the files in Zotero database: {0}".format(len(local_files)))
     for f in local_files:
         print(" ",f.key)
-    print("----------------------------------------------")
 
     if (flag_empty):
-        print("Citation keys of items without attachment files:")
+        print("-"*45)
+        print("Citation keys of items without attachment files: {0}".format(len(empty_files)))
         for f in empty_files:
             print(" ",f.key)
+
+def filterZombieFiles(bib_lib, custom_location, flag_clean=False):
+    """Filter these attachment files that have been deleted in Zotero but still
+    exist in ZotFile.
+    """
+    # Get the complete file list in ZotFile `custom location`
+    file_list = []
+    for root, _, files in os.walk(custom_location):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_list.append(file_path)
+
+    # Get the complete attachments file list in Zotero library
+    lib_file_list = []
+    for entry in bib_lib.entries:
+        try:
+            # In case there are multiple attachments in one entry
+            files = entry['file'].split(";")
+            for file in files:
+                lib_file_list.append(file)
+        except KeyError:
+            # Empty items
+            pass
+    
+    # Find the files of ZotFile that are not in Zotero library
+    file_zombies = list(set(file_list)-set(lib_file_list))
+    print("-"*45)
+    print("ZotFile zombie files: {0}".format(len(file_zombies)))
+    for zombie in file_zombies:
+        print(" ", zombie)
+
+    if (flag_clean):
+        print("-"*45)
+        print("Moving Zombie Files to Trash...")
+        for zombie in file_zombies:
+            send2trash(zombie)
+
+    return
 
 def getArgs():
     """Built scripts command line arguments
@@ -80,6 +119,15 @@ def getArgs():
             required = False
             )
 
+    parser.add_argument(
+            '-d',
+            '--delete',
+            action = 'store_true',
+            help = " Clean up the zombie files under ZotFile folder .",
+            required = False
+            )
+
+
     return(parser.parse_args())
 
 def main():
@@ -93,10 +141,15 @@ def main():
     bib_file_name = args.file
     custom_location = args.customlocation
     flag_empty = args.empty
+    flag_clean = args.delete
 
     bib_lib = bibReader(bib_file_name)
     
     checkLocalFile(bib_lib,custom_location,flag_empty)
+
+    filterZombieFiles(bib_lib, custom_location, flag_clean)
+
+    print("Done!")
 
 if __name__ == "__main__":
 
