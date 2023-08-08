@@ -36,7 +36,7 @@ optional arguments:
   -d, --delete          Clean up the zombie files under ZotFile folder .
 ```
 ### Examples
--1. Find the items that are locally stored in Zotero database instead of ZotFile custom locations
+1. Find the items that are locally stored in Zotero database instead of ZotFile custom locations
     ```
     # Replace with your own path
     python3 ~/github/Zotero/src/zotfileCleaner.py -f "YOUR/PATH/mylib.bib" -c "YOUR/ZOTFILE/CUSTOM/PATH"
@@ -50,7 +50,7 @@ optional arguments:
     ZotFile zombie files: 7
     Done!
     ```
--2. Find the items without any attachment files
+2. Find the items without any attachment files
     ```sh
     # Replace with your own path
     python3 ~/github/Zotero/src/zotfileCleaner.py -f "YOUR/PATH/mylib.bib" -c "YOUR/ZOTFILE/CUSTOM/PATH" -e
@@ -73,7 +73,7 @@ optional arguments:
     ZotFile zombie files: 7
     Done!
     ```
--3. Delete the ZotFile zombie files
+3. Delete the ZotFile zombie files
     ```sh
     # Replace with your own path
     python3 ~/github/Zotero/src/zotfileCleaner.py -f "YOUR/PATH/mylib.bib" -c "YOUR/ZOTFILE/CUSTOM/PATH" -d
