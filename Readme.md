@@ -1,6 +1,9 @@
 ZotFileCleaner
 ==============
-An utility to find pdf files that are locally stored in Zotero database instead of ZotFile custom locations.
+An utility to find pdf files that are locally stored in Zotero database instead of ZotFile custom locations.  
+- Filter and clean the attachment PDF files already deleted in Zotero library.
+- Filter Zotero items that is without any attachments.
+- Filter and clean the empty/orphan folders in ZotFile custom location.
 
 ## 0. Prerequisite
 This utility relies on the `ZotFile` and `Better Bibtex` plugins. If you use them too, you may face the same problem as me. 
