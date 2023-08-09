@@ -78,14 +78,40 @@ def filterZombieFiles(bib_lib, custom_location, flag_clean=False):
     print("-"*45)
     print("ZotFile zombie files: {0}".format(len(file_zombies)))
 
-    if (flag_clean):
-        print("-"*45)
-        print("Moving Zombie Files to Trash...")
+    if ( flag_clean and len(file_zombies)>0 ):
+        print(" Moving Zombie Files to Trash...")
         for zombie in file_zombies:
             print(" ", zombie)
             send2trash(zombie)
 
+    # Find the empty folders in ZotFile
+    file_zombies = list(set(file_list)-set(lib_file_list))
+    orphan_list = filterOrphanFolders(custom_location,flag_clean)
+    print("-"*45)
+    print("ZotFile orphan empty folders: {0}".format(len(orphan_list)))
+
+    if ( flag_clean and len(orphan_list)>0 ):
+        print(" Moving Orphan Empty Folders to Trash")
+        for sub_dir in orphan_list:
+            print(" ", sub_dir)
+            send2trash(sub_dir)
+
     return
+
+def filterOrphanFolders(custom_location, flag_clean=False):
+    """Filter empty folders under ZotFiles folders and clean them.
+    """
+    # Get the complete file and folder list in ZotFile `custom location`
+    orphan_list = []
+    for root, dirs, files in os.walk(custom_location):
+        for sub_dir in dirs:
+            folder_path = os.path.join(root, sub_dir)
+            if ( 
+                not any((True for _ in os.scandir(folder_path))) 
+                ):
+                orphan_list.append(folder_path)
+
+    return orphan_list
 
 def getArgs():
     """Built scripts command line arguments
@@ -148,6 +174,7 @@ def main():
 
     filterZombieFiles(bib_lib, custom_location, flag_clean)
 
+    print("-"*45)
     print("Done!")
 
 if __name__ == "__main__":
