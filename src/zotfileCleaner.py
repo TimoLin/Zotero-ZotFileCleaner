@@ -34,8 +34,10 @@ def checkLocalFile(bib_lib, custom_location, flag_empty):
 
     for entry in bib_lib.entries:
         try: 
-            if not entry['file'].startswith(custom_location):
-                local_files.append(entry)
+            files = entry['file'].split(";")
+            for file in files:
+                if not file.startswith(custom_location):
+                    local_files.append(entry)
         except KeyError:
             empty_files.append(entry)
 
