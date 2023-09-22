@@ -119,7 +119,7 @@ def getArgs():
     """Built scripts command line arguments
     """
     parser = argparse.ArgumentParser(
-                description = "ZotFileCleaner: An utility to find pdf files that are locally stored in Zotero database instead of ZotFile custom locations."
+                description = "ZotFileCleaner: A utility to find pdf files that are locally stored in Zotero database instead of ZotFile custom locations."
                 )
 
     parser.add_argument(
