@@ -1,4 +1,15 @@
-
+# 2023/09/22 11:32:01  zt
+'''
+Programe description:
+    - Extract all the citation keys from the word document.
+    - Find all the citation entries in the Zotero bib lib file and output these
+      entries in a seperate bib file.
+Reference:
+    - Play with word document
+      https://dadoverflow.com/2022/01/30/parsing-word-documents-with-python/
+    - Create bib files
+      https://github.com/sciunto-org/python-bibtexparser/issues/399
+'''
 import zipfile
 import xml.etree.ElementTree as ET
 import json
