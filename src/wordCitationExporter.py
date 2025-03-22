@@ -64,6 +64,8 @@ def extractCitations(citeText):
 
     # Remove duplicate items
     citeKeys = set(citeKeys)
+    print("Found {0} citation keys in Word:".format(len(citeKeys)))
+    print("  "+"\n  ".join(citeKeys))
 
     return citeKeys
 
